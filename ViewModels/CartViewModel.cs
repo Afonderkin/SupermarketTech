@@ -21,9 +21,7 @@ namespace SupermarketTech.ViewModels
         public ICommand RemoveCommand { get; }
         public ICommand CheckoutCommand { get; }
 
-        public CartViewModel() : this(new CartService())
-        {
-        }
+        public CartViewModel() : this(App.CartService) { }
 
         public CartViewModel(CartService cart)
         {

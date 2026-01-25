@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SupermarketTech.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -8,10 +9,8 @@ using System.Windows;
 
 namespace SupermarketTech
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public static CartService CartService { get; } = new CartService();
     }
 }

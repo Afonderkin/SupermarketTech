@@ -12,8 +12,7 @@ namespace SupermarketTech.ViewModels
     internal class CatalogViewModel : BaseViewModel
     {
         private readonly ProductRepository _productRepo = new ProductRepository();
-        private readonly CartService _cartService = new CartService();
-        public CartService Cart => _cartService;
+        public CartService Cart => App.CartService;
 
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
         public ObservableCollection<string> Categories { get; } = new ObservableCollection<string>();
@@ -54,7 +53,7 @@ namespace SupermarketTech.ViewModels
             AddToCartCommand = new RelayCommand(o =>
             {
                 var p = o as Product;
-                if (p != null) _cartService.Add(p, 1);
+                if (p != null) Cart.Add(p, 1);
             });
 
             LoadProducts();

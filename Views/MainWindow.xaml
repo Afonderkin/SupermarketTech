@@ -62,7 +62,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Корзина">
+            <TabItem x:Name="CartTab" Header="Корзина">
                 <local:CartView />
             </TabItem>
 
