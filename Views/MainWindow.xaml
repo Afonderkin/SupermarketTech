@@ -31,6 +31,8 @@
                         <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="0,5"/>
                         <TextBlock Text="Поиск"/>
                         <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+                        <TextBlock Text="Мин. цена"/>
+                        <TextBox Text="{Binding MinPrice, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                         <TextBlock Text="Макс. цена"/>
                         <TextBox Text="{Binding MaxPrice}" Margin="0,5"/>
                     </StackPanel>
@@ -63,11 +65,10 @@
             </TabItem>
 
             <TabItem x:Name="CartTab" Header="Корзина">
-                <local:CartView />
             </TabItem>
 
             <TabItem Header="Администрирование" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisConverter}}">
-                <local:AdminView />
+                <local:AdminView x:Name="AdminViewControl"/>
             </TabItem>
         </TabControl>
     </Grid>

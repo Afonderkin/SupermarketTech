@@ -14,7 +14,7 @@ namespace SupermarketTech.ViewModels
 {
     internal class AdminViewModel : BaseViewModel
     {
-        private readonly ProductRepository _repo = new ProductRepository();
+        private readonly ProductRepository _repo;
 
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
 
@@ -25,6 +25,7 @@ namespace SupermarketTech.ViewModels
 
         public AdminViewModel()
         {
+            _repo = App.ProductRepo;
             RefreshCommand = new RelayCommand(o => Load());
             AddCommand = new RelayCommand(o =>
             {

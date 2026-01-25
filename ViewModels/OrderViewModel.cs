@@ -1,19 +1,20 @@
-﻿using System;
+﻿using SupermarketTech.Infrastructure;
+using SupermarketTech.Models;
+using SupermarketTech.Services;
+using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using SupermarketTech.Infrastructure;
-using SupermarketTech.Models;
-using SupermarketTech.Services;
 
 namespace SupermarketTech.ViewModels
 {
     internal class OrderViewModel : BaseViewModel
     {
         private readonly CartService _cart;
-        private readonly OrderService _orderService = new OrderService();
+        private readonly User _currentUser;
 
-        public Order Order { get; }
+        public ObservableCollection<OrderItem> Items { get; }
 
         public decimal Total => _cart.Total;
         public DateTime OrderDate { get; } = DateTime.Now;
@@ -22,34 +23,39 @@ namespace SupermarketTech.ViewModels
         public ICommand ConfirmCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public OrderViewModel(CartService cart)
+        public OrderViewModel(CartService cart, User currentUser)
         {
             _cart = cart;
-            Order = new Order
-            {
-                Items = _cart.Items.Select(i => new OrderItem { ProductId = i.ProductId, Product = i.Product, Quantity = i.Quantity }).ToList(),
-                Total = _cart.Total,
-                OrderDate = OrderDate,
-                DeliveryDate = DeliveryDate
-            };
+            _currentUser = currentUser;
+
+            Items = _cart.Items;
 
             ConfirmCommand = new RelayCommand(o => ExecuteConfirm(o));
             CancelCommand = new RelayCommand(o =>
             {
-                // Закрыть окно (View)
                 var win = o as Window;
                 win?.Close();
             });
         }
 
+
         private void ExecuteConfirm(object parameter)
         {
-            // Для примера можно задать UserId=1
-            Order.UserId = 1;
-            _orderService.PlaceOrder(Order);
-            _cart.Clear();
+            var order = new Order
+            {
+                UserId = _currentUser.Id,
+                Items = new System.Collections.Generic.List<OrderItem>(Items),
+                Total = Total,
+                OrderDate = OrderDate,
+                DeliveryDate = DeliveryDate
+            };
 
+            var orderService = new OrderService();
+            orderService.PlaceOrder(order);
+
+            _cart.Clear();
             MessageBox.Show("Заказ подтверждён и сохранён.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
             var win = parameter as Window;
             win?.Close();
         }

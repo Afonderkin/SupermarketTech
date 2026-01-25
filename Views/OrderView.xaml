@@ -1,4 +1,4 @@
-<Window x:Class="SupermarketTech.Views.OrderView"
+﻿<Window x:Class="SupermarketTech.Views.OrderView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Оформление заказа" Height="400" Width="600" WindowStartupLocation="CenterOwner">
@@ -8,7 +8,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding Order.Items}" AutoGenerateColumns="False" CanUserAddRows="False">
+        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Product.Name}" Width="*"/>
                 <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C}" Width="100"/>

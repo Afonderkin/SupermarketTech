@@ -6,17 +6,21 @@
              xmlns:local="clr-namespace:SupermarketTech.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewModels:AdminViewModel xmlns:viewModels="clr-namespace:SupermarketTech.ViewModels"/>
-    </UserControl.DataContext>
 
     <Grid Margin="10">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
-            <Button Content="Добавить товар" Command="{Binding AddCommand}" Margin="0,0,10,0"/>
-            <Button Content="Обновить" Command="{Binding RefreshCommand}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель с кнопками в первой строке -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+            <Button Content="Добавить товар" Command="{Binding AddCommand}" Margin="0,0,10,0" Width="120"/>
+            <Button Content="Обновить" Command="{Binding RefreshCommand}" Width="80"/>
         </StackPanel>
 
-        <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False" Margin="0,40,0,0" CanUserAddRows="False">
+        <!-- DataGrid во второй строке -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
                 <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
@@ -27,10 +31,15 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Изменить" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}" Margin="0,0,5,0"/>
-                                <Button Content="Удалить" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}"/>
+                                <Button Content="Изменить" 
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}" 
+                                        Margin="0,0,5,0"
+                                        Width="80"/>
+                                <Button Content="Удалить" 
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Width="80"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

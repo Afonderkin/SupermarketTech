@@ -127,19 +127,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\AddProductView.xaml.cs">
+      <DependentUpon>AddProductView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CartView.xaml.cs">
       <DependentUpon>CartView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditProductView.xaml.cs">
+      <DependentUpon>EditProductView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderView.xaml.cs">
+      <DependentUpon>OrderView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddProductView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdminView.xaml">
@@ -149,6 +159,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditProductView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginView.xaml">
@@ -158,6 +169,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -193,5 +205,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\placeholder.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

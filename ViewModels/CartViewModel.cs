@@ -14,34 +14,55 @@ namespace SupermarketTech.ViewModels
     public class CartViewModel : BaseViewModel
     {
         private readonly CartService _cart;
+        private readonly User _currentUser;
         public ObservableCollection<OrderItem> Items => _cart.Items;
 
-        public decimal Total => _cart.Total;
+        public decimal Total => Items.Sum(i => i.Total);
 
         public ICommand RemoveCommand { get; }
         public ICommand CheckoutCommand { get; }
 
-        public CartViewModel() : this(App.CartService) { }
-
-        public CartViewModel(CartService cart)
+        public CartViewModel(User currentUser, CartService cart = null)
         {
-            _cart = cart;
+            _currentUser = currentUser;
+            _cart = cart ?? App.CartService;
+
+            foreach (var item in _cart.Items)
+                item.PropertyChanged += Item_PropertyChanged;
+
+            Items.CollectionChanged += (s, e) =>
+            {
+                if (e.NewItems != null)
+                {
+                    foreach (OrderItem item in e.NewItems)
+                        item.PropertyChanged += Item_PropertyChanged;
+                }
+
+                OnPropertyChanged(nameof(Total));
+            };
+
             RemoveCommand = new RelayCommand(o =>
             {
-                var item = o as OrderItem;
-                if (item != null) _cart.Remove(item);
+                if (o is OrderItem item)
+                    _cart.Remove(item);
                 OnPropertyChanged(nameof(Total));
             });
 
             CheckoutCommand = new RelayCommand(o =>
             {
-                // открыть окно оформления заказа
                 var wnd = new Views.OrderView();
-                wnd.DataContext = new OrderViewModel(_cart);
+                wnd.DataContext = new OrderViewModel(_cart, _currentUser);
                 wnd.ShowDialog();
                 OnPropertyChanged(nameof(Total));
             });
-            Items.CollectionChanged += (s, e) => OnPropertyChanged(nameof(Total));
+        }
+
+        private void Item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(OrderItem.Quantity) || e.PropertyName == nameof(OrderItem.Total))
+            {
+                OnPropertyChanged(nameof(Total));
+            }
         }
     }
 }

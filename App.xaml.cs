@@ -1,4 +1,5 @@
-﻿using SupermarketTech.Services;
+﻿using SupermarketTech.DataAccess;
+using SupermarketTech.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,5 +13,6 @@ namespace SupermarketTech
     public partial class App : Application
     {
         public static CartService CartService { get; } = new CartService();
+        public static ProductRepository ProductRepo { get; } = new ProductRepository();
     }
 }

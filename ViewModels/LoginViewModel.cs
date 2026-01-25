@@ -44,7 +44,7 @@ namespace SupermarketTech.ViewModels
                 return;
             }
 
-            var mw = new Views.MainWindow();
+            var mw = new Views.MainWindow(user);
             mw.DataContext = new CatalogViewModel(user);
             mw.Show();
 
