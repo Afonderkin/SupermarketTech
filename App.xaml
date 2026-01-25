@@ -1,7 +1,8 @@
 ﻿<Application x:Class="SupermarketTech.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Views/LoginView.xaml">
+             StartupUri="Views/LoginView.xaml"
+             ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

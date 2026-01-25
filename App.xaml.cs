@@ -14,5 +14,6 @@ namespace SupermarketTech
     {
         public static CartService CartService { get; } = new CartService();
         public static ProductRepository ProductRepo { get; } = new ProductRepository();
+        public static UserRepository UserRepo { get; } = new UserRepository();
     }
 }

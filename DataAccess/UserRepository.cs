@@ -5,7 +5,7 @@ using SupermarketTech.Models;
 
 namespace SupermarketTech.DataAccess
 {
-    internal class UserRepository
+    public class UserRepository
     {
         public User GetByLogin(string login)
         {
@@ -32,6 +32,38 @@ namespace SupermarketTech.DataAccess
                 }
             }
             return null;
+        }
+
+        public void UpdateUser(User user)
+        {
+            using (var conn = MySqlConnectionFactory.CreateConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE Users SET Login = @login, Password = @password WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@login", user.Login);
+                    cmd.Parameters.AddWithValue("@password", user.Password);
+                    cmd.Parameters.AddWithValue("@id", user.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void AddUser(User user)
+        {
+            using (var conn = MySqlConnectionFactory.CreateConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO Users (Login, Password, Role) VALUES (@login, @password, @role)";
+                    cmd.Parameters.AddWithValue("@login", user.Login);
+                    cmd.Parameters.AddWithValue("@password", user.Password);
+                    cmd.Parameters.AddWithValue("@role", user.Role ?? "user");
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

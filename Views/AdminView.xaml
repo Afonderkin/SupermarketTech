@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SupermarketTech.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{StaticResource WindowBackgroundGradient}">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -27,7 +28,7 @@
                 <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="120"/>
                 <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C}" Width="100"/>
                 <DataGridTextColumn Header="Остаток" Binding="{Binding Stock}" Width="80"/>
-                <DataGridTemplateColumn Header="Действия" Width="160">
+                <DataGridTemplateColumn Header="Действия" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

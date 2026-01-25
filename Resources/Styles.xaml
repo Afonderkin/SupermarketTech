@@ -1,41 +1,197 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <!-- Градиентный фон для окон -->
+    <LinearGradientBrush x:Key="WindowBackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FFFAFAFA" Offset="0.0"/>
+        <GradientStop Color="#FFE0E0E0" Offset="1.0"/>
+    </LinearGradientBrush>
 
+    <!-- ================== Цветовая палитра ================== -->
+    <Color x:Key="PrimaryColor">#2196F3</Color>
+    <Color x:Key="PrimaryDarkColor">#1976D2</Color>
+    <Color x:Key="PrimaryLightColor">#BBDEFB</Color>
+    <Color x:Key="AccentColor">#FF4081</Color>
+    <Color x:Key="SuccessColor">#4CAF50</Color>
+    <Color x:Key="WarningColor">#FF9800</Color>
+    <Color x:Key="ErrorColor">#F44336</Color>
+    <Color x:Key="TextPrimary">#212121</Color>
+    <Color x:Key="TextSecondary">#757575</Color>
+    <Color x:Key="DividerColor">#E0E0E0</Color>
+    <Color x:Key="BackgroundColor">#FAFAFA</Color>
+    <Color x:Key="CardColor">#FFFFFF</Color>
+    <Color x:Key="HoverColor">#F5F5F5</Color>
+
+    <!-- ================== Brushes ================== -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource PrimaryDarkColor}"/>
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLightColor}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}"/>
+    <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}"/>
+    <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}"/>
+
+    <!-- ================== Тени ================== -->
+    <DropShadowEffect x:Key="ShadowSmall" Color="#20000000" BlurRadius="8" ShadowDepth="2"/>
+    <DropShadowEffect x:Key="ShadowMedium" Color="#40000000" BlurRadius="16" ShadowDepth="4"/>
+    <DropShadowEffect x:Key="ShadowLarge" Color="#60000000" BlurRadius="24" ShadowDepth="8"/>
+
+    <!-- ================== Window ================== -->
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+    <!-- ================== Button ================== -->
     <Style TargetType="Button">
-        <Setter Property="Background" Value="#4CAF50"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Padding" Value="10,4"/>
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="28"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Padding" Value="8,4"/>
-        <Setter Property="Margin" Value="2"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                        <ContentPresenter 
-                        ContentSource="Content" 
-                        HorizontalAlignment="Center" 
+                    <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
+                        <ContentPresenter
+                        HorizontalAlignment="Center"
                         VerticalAlignment="Center"/>
                     </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background"
+                                Value="{StaticResource PrimaryDarkBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="TextBox">
-        <Setter Property="Padding" Value="6"/>
-        <Setter Property="Margin" Value="2"/>
-    </Style>
-
-    <Style x:Key="CardBorder" TargetType="Border">
-        <Setter Property="CornerRadius" Value="6"/>
+    <!-- ================== InputBase ================== -->
+    <Style x:Key="InputBase" TargetType="Control">
+        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="#EEE"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DividerBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Margin" Value="6"/>
-        <Setter Property="Padding" Value="8"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
     </Style>
 
+    <!-- ================== TextBox ================== -->
+    <Style TargetType="TextBox" BasedOn="{StaticResource InputBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                  Padding="{TemplateBinding Padding}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush"
+                                Value="{StaticResource PrimaryBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ================== PasswordBox ================== -->
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource InputBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                  Padding="{TemplateBinding Padding}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush"
+                                Value="{StaticResource PrimaryBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ================== Card ================== -->
+    <Style x:Key="CardStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DividerBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Effect" Value="{StaticResource ShadowSmall}"/>
+    </Style>
+
+    <!-- ================== Text ================== -->
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style x:Key="TitleText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!-- Snackbar -->
+    <Style TargetType="materialDesign:Snackbar" x:Key="CompactSnackbarStyle">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="0,0,0,24"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinWidth" Value="200"/>
+        <Setter Property="MaxWidth" Value="400"/>
+        <Setter Property="Background" Value="#333333"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Effect" Value="{StaticResource ShadowMedium}"/>
+    </Style>
+
+    <!-- Конвертеры -->
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
 
 </ResourceDictionary>

@@ -1,11 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Input;
+﻿using MaterialDesignThemes.Wpf;
+using SupermarketTech.DataAccess;
 using SupermarketTech.Infrastructure;
 using SupermarketTech.Models;
 using SupermarketTech.Services;
-using SupermarketTech.DataAccess;
+using SupermarketTech.Views;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
 
 namespace SupermarketTech.ViewModels
 {
@@ -13,6 +16,7 @@ namespace SupermarketTech.ViewModels
     {
         private readonly ProductRepository _repo;
         public CartService Cart => App.CartService;
+        public SnackbarMessageQueue SnackbarMessageQueue { get; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(2));
 
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
         public ObservableCollection<string> Categories { get; } = new ObservableCollection<string>();
@@ -53,6 +57,7 @@ namespace SupermarketTech.ViewModels
         public bool IsAdmin => _user?.Role == "admin";
 
         public ICommand AddToCartCommand { get; }
+        public ICommand UserCommand { get; }
 
         public CatalogViewModel(Models.User user)
         {
@@ -66,6 +71,15 @@ namespace SupermarketTech.ViewModels
             {
                 var p = o as Product;
                 if (p != null) Cart.Add(p, 1);
+                SnackbarMessageQueue.Enqueue($"{p.Name} добавлен в корзину!");
+            });
+
+            UserCommand = new RelayCommand(o =>
+            {
+                var wnd = new UserSettingsWindow();
+                wnd.DataContext = new UserSettingsViewModel(_user);
+                wnd.Owner = App.Current.MainWindow;
+                wnd.ShowDialog();
             });
 
             LoadProducts();

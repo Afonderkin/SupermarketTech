@@ -1,9 +1,11 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using SupermarketTech.Infrastructure;
+﻿using SupermarketTech.Infrastructure;
 using SupermarketTech.Models;
 using SupermarketTech.Services;
+using SupermarketTech.Views;
+using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace SupermarketTech.ViewModels
 {
@@ -26,10 +28,12 @@ namespace SupermarketTech.ViewModels
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand ShowRegisterCommand { get; }
 
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(o => ExecuteLogin(o));
+            ShowRegisterCommand = new RelayCommand(o => OpenRegistration(o));
         }
 
         private void ExecuteLogin(object parameter)
@@ -57,6 +61,26 @@ namespace SupermarketTech.ViewModels
                     break;
                 }
             }
+        }
+
+        private void OpenRegistration(object parameter)
+        {
+            var loginWindow = Application.Current.Windows
+                                .OfType<Window>()
+                                .FirstOrDefault(w => w.DataContext == this);
+
+            if (loginWindow == null) return;
+
+            var regWindow = new RegistrationView();
+            regWindow.DataContext = new RegistrationViewModel();
+
+            regWindow.Owner = loginWindow;
+
+            loginWindow.Hide();
+
+            regWindow.Closed += (s, e) => loginWindow.Show();
+
+            regWindow.ShowDialog();
         }
     }
 }
