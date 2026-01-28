@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows;
 
 namespace SupermarketTech.ViewModels
 {
@@ -26,12 +27,14 @@ namespace SupermarketTech.ViewModels
 
             CancelOrderCommand = new RelayCommand(o =>
             {
-                if (App.Current.MainWindow != null &&
-                    System.Windows.MessageBox.Show("Вы точно хотите отменить заказ?", "Подтверждение", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Warning)
-                    == System.Windows.MessageBoxResult.Yes)
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    App.OrderService.DeleteOrder(OrderId);
-                }
+                    if (MessageBox.Show("Вы точно хотите отменить заказ?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning)
+                        == MessageBoxResult.Yes)
+                    {
+                        App.OrderService.DeleteOrder(OrderId);
+                    }
+                });
             });
         }
     }

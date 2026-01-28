@@ -77,24 +77,15 @@ namespace SupermarketTech.ViewModels
 
         private void Logout(object parameter)
         {
-            var win = parameter as Window;
-            win?.Close();
-
-            var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            if (mainWindow != null)
-            {
-                mainWindow.Close();
-            }
+            var loginWindow = new LoginView();
+            loginWindow.Show();
 
             var windowsToClose = Application.Current.Windows.OfType<Window>().ToList();
             foreach (var window in windowsToClose)
             {
-                if (window != win && window != mainWindow)
+                if (window != loginWindow)
                     window.Close();
             }
-
-            var loginWindow = new LoginView();
-            loginWindow.Show();
         }
     }
 }

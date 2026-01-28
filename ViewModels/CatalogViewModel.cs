@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SupermarketTech.ViewModels
@@ -78,10 +79,20 @@ namespace SupermarketTech.ViewModels
 
             UserCommand = new RelayCommand(o =>
             {
-                var wnd = new UserSettingsWindow();
-                wnd.DataContext = new UserSettingsViewModel(_user);
-                wnd.Owner = App.Current.MainWindow;
-                wnd.ShowDialog();
+                try
+                {
+                    var wnd = new UserSettingsWindow();
+                    wnd.DataContext = new UserSettingsViewModel(_user);
+
+                    if (App.Current.MainWindow != null && App.Current.MainWindow != wnd)
+                        wnd.Owner = App.Current.MainWindow;
+
+                    wnd.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при открытии настроек: {ex.Message}\n{ex.StackTrace}");
+                }
             });
 
             LoadProducts();

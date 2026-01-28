@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace SupermarketTech.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для UserSettingsWindow.xaml
-    /// </summary>
     public partial class UserSettingsWindow : Window
     {
         public UserSettingsWindow()
