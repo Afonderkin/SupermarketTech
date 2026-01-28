@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Background="#FFF">
-            <TextBlock Text="Супермаркет цифровой техники" FontSize="20" FontWeight="Bold" />
+            <TextBlock Text="Супермаркет цифровой техники" FontSize="20" FontWeight="Bold" Margin="10, 0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="{Binding CurrentUser.Login}" 
                                  Cursor="Hand" 
