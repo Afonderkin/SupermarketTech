@@ -13,6 +13,7 @@ namespace SupermarketTech
     public partial class App : Application
     {
         public static CartService CartService { get; } = new CartService();
+        public static OrderService OrderService { get; } = new OrderService();
         public static ProductRepository ProductRepo { get; } = new ProductRepository();
         public static UserRepository UserRepo { get; } = new UserRepository();
     }

@@ -79,6 +79,7 @@
       <HintPath>packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
@@ -97,6 +98,7 @@
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -132,6 +134,9 @@
     <Compile Include="ViewModels\CatalogViewModel.cs" />
     <Compile Include="ViewModels\EditProductViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MyOrdersViewModel.cs" />
+    <Compile Include="ViewModels\OrderHistoryItemViewModel.cs" />
+    <Compile Include="ViewModels\OrderHistoryProductViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="App.xaml.cs">
@@ -157,6 +162,9 @@
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyOrdersView.xaml.cs">
+      <DependentUpon>MyOrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
@@ -189,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MyOrdersView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderView.xaml">
@@ -231,6 +243,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Assets\Images\xiaomiredminote14.jpg" />
     <Resource Include="Resources\Noto\NotoSans-Bold.ttf" />
     <Resource Include="Resources\Noto\NotoSans-BoldItalic.ttf" />
     <Resource Include="Resources\Noto\NotoSans-Italic.ttf" />
@@ -257,9 +270,47 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\honormagicbookx16amd2025.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Assets\Images\placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\msikatana17.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\matebookd162024mclg-x.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\appleiphone17pro.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\applewatchse202440mm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\ardorgamingfury3327.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\ardorgaminginfinityproaq27h1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\ardorgamingneom143.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\ardorgamingrageh418.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\attacksharkr5ultra.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\aulaf75.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\darkprojectkd87a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assets\Images\msipromp273a.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.5.3.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.5.3.0\build\MaterialDesignThemes.targets')" />

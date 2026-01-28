@@ -26,7 +26,7 @@
                                     Width="*" />
 
                 <DataGridTextColumn Header="Цена"
-                                    Binding="{Binding Price, StringFormat=C}"
+                                    Binding="{Binding Price, StringFormat={}{0:N0} ₽}"
                                     Width="100" />
 
                 <DataGridTextColumn Header="Кол-во"
@@ -34,7 +34,7 @@
                                     Width="80" />
 
                 <DataGridTextColumn Header="Сумма"
-                                    Binding="{Binding Total, StringFormat=C}"
+                                    Binding="{Binding Total, StringFormat={}{0:N0} ₽}"
                                     Width="120" />
 
                 <DataGridTemplateColumn Header="Действие" Width="auto">
@@ -60,7 +60,7 @@
                        FontWeight="Bold"
                        VerticalAlignment="Center"/>
 
-            <TextBlock Text="{Binding Total, StringFormat=C}"
+            <TextBlock Text="{Binding Total, StringFormat={}{0:N0} ₽}"
                        FontWeight="Bold"
                        Margin="5,0"
                        VerticalAlignment="Center"/>

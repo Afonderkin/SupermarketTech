@@ -26,7 +26,7 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
                 <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="120"/>
-                <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C}" Width="100"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat={}{0:N0} ₽}" Width="100"/>
                 <DataGridTextColumn Header="Остаток" Binding="{Binding Stock}" Width="80"/>
                 <DataGridTemplateColumn Header="Действия" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>

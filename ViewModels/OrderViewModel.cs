@@ -50,8 +50,7 @@ namespace SupermarketTech.ViewModels
                 DeliveryDate = DeliveryDate
             };
 
-            var orderService = new OrderService();
-            orderService.PlaceOrder(order);
+            App.OrderService.PlaceOrder(order);
 
             _cart.Clear();
             MessageBox.Show("Заказ подтверждён и сохранён.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);

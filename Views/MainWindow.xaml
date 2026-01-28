@@ -59,8 +59,8 @@
                                     <Border BorderBrush="#DDD" BorderThickness="1" Padding="8" Margin="6" Width="220">
                                         <StackPanel>
                                             <Image Source="{Binding ImagePath}" Height="120" Stretch="Uniform" />
-                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,6,0,0"/>
-                                            <TextBlock Text="{Binding Price, StringFormat=C}" Foreground="#2E8B57"/>
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,6,0,0" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Price, StringFormat={}{0:N0} ₽}" Foreground="#2E8B57"/>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,6,0,0">
                                                 <Button Content="В корзину" Command="{Binding DataContext.AddToCartCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                                         CommandParameter="{Binding}" />
@@ -75,6 +75,10 @@
             </TabItem>
 
             <TabItem x:Name="CartTab" Header="Корзина">
+            </TabItem>
+
+            <TabItem Header="Мои заказы">
+                <local:MyOrdersView DataContext="{Binding MyOrdersVM}" />
             </TabItem>
 
             <TabItem Header="Администрирование" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisConverter}}">

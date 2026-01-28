@@ -16,6 +16,7 @@ namespace SupermarketTech.ViewModels
     {
         private readonly ProductRepository _repo;
         public CartService Cart => App.CartService;
+        public MyOrdersViewModel MyOrdersVM { get; }
         public SnackbarMessageQueue SnackbarMessageQueue { get; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(2));
 
         public ObservableCollection<Product> Products { get; } = new ObservableCollection<Product>();
@@ -36,7 +37,7 @@ namespace SupermarketTech.ViewModels
             set { Set(ref _selectedCategory, value); ApplyFilters(); }
         }
 
-        private decimal _maxPrice = 100000;
+        private decimal _maxPrice = 10000000;
         public decimal MaxPrice
         {
             get { return _maxPrice; }
@@ -63,6 +64,7 @@ namespace SupermarketTech.ViewModels
         {
             _repo = App.ProductRepo;
             _user = user;
+            MyOrdersVM = new MyOrdersViewModel(_user);
 
             App.ProductRepo.RepositoryChanged += LoadProducts;
 

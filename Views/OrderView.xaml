@@ -12,15 +12,15 @@
         <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Product.Name}" Width="*"/>
-                <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C}" Width="100"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat={}{0:N0} ₽}" Width="100"/>
                 <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}" Width="80"/>
-                <DataGridTextColumn Header="Сумма" Binding="{Binding Total, StringFormat=C}" Width="100"/>
+                <DataGridTextColumn Header="Сумма" Binding="{Binding Total, StringFormat={}{0:N0} ₽}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10">
             <TextBlock Text="Итого: " VerticalAlignment="Center" FontWeight="Bold"/>
-            <TextBlock Text="{Binding Total, StringFormat=C}" Margin="5,0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Total, StringFormat={}{0:N0} ₽}" Margin="5,0" VerticalAlignment="Center" FontWeight="Bold"/>
             <Button Content="Подтвердить заказ" Command="{Binding ConfirmCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="10,0"/>
             <Button Content="Отмена" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="5,0"/>
         </StackPanel>
